@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>introduction</title>
+    <style>
+        div{
+            width: 500px;
+            color:black;
+            border:solid 3px lightseagreen;
+            background-color:antiquewhite;
+        }
+
+        div .page{
+            color: black;
+            text-align: center;
+        }
+
+        div img{
+            width:100%;
+            height:250px;
+        }
+
+        code{
+            color:mediumvioletred;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="0">
+        <h1>コード説明（関数）</h1>
+        <h1>目次</h1>
+        <ul>
+            <li><a href="#1">はじめに</a></li>
+            <li><a href="#2">板配置関数</a></li>
+            <li><a href="#6">テキスト用マテリアル作成関数</a></li>
+            <li><a href="#10">画像用マテリアル作成関数</a></li>
+            <li><a href="#13">動画用マテリアル作成関数</a></li>
+            <li><a href="#18">html用マテリアル作成関数</a></li>
+            <li><a href="#20">終わりに</a></li>
+        </ul>
+        <p class="page">0</p>
+    </div>
+
+
+    <div id="1">
+        <h1>はじめに</h1>
+        <p>これらのコードはネットで調べながら行き当たりばったりで書いたコードです。</p>
+        <p>また、ここで書いている内容もネットで調べながら自分なりに解釈したものです。</p>
+        <p>そのため、不適切な点や誤った点もあるかと思います。 ご容赦ください。</p>
+        <p class="page">1</p>
+    </div>
+
+    <div id="2">
+        <h1>板配置用関数</h1>
+        <p>関数全体</p>
+        <pre><code >
+function addPlane(numP,material,PosArray,ScaleArray,RotationArray){
+
+    //板のジオメトリ（形状）を設定
+    var geometry  = new THREE.PlaneGeometry(2, 2); 
+              
+    //マテリアルとジオメトリからメッシュ（物体）を作る。
+    planes[numP]=new THREE.Mesh(geometry, material); 
+
+    //配置する場所
+    planes[numP].position.set(PosArray[0], PosArray[1], PosArray[2]);
+
+    //大きさ
+    if(ScaleArray){
+        planes[numP].scale.set(ScaleArray[0],ScaleArray[1],ScaleArray[2]);
+    }
+
+    //回転
+    if(RotationArray)planes[numP].rotation.set(
+    Math.PI*RotationArray[0]/180,Math.PI*RotationArray[1]/180,
+    Math.PI*RotationArray[2]/180);
+    
+            
+    //シーンに追加（見える様になる）
+    scene.add(planes[numP]);
+}
+        </code></pre>
+
+        <p class="page">2</p>
+    </div>
+
+    <div id="3">
+        <h1>板配置用関数　1/3</h1>
+        <h2>引数の説明</h2>
+        <ul>
+            <li><code>numP</code>:　自作配列planesのインデックス</li>
+            <li><code>material</code>:　マテリアル（材質や模様）</li>
+            <li><code>PosArray</code>:　位置座標</li>
+            <li><code>ScaleArray</code>:　大きさ</li>
+            <li><code>RotationArray</code>:　回転具合</li>
+        </ul>
+        <p class="page">3</p>
+    </div>
+    
+    <div id="4">
+        <h1>板配置用関数　2/3</h1>
+        <h2>メッシュの生成</h2>
+        <p>mesh（物体）は2つの要素「geometry(形状)」,「material(材質)」からなる</p>
+        <br>
+        <p>板の形状のgeometryは<code>var geometry  = new THREE.PlaneGeometry(2, 2); </code>により生成する。</p>
+        <p>materialは<strong>『別の関数』（後半で説明）</strong>によって生成する。</p>
+        <p><code>planes[numP]=new THREE.Mesh(geometry, material);</code>によりgeometryとmaterialを合わせてmeshを生成する（planes[numP]が生成されたmeshとなる)</p>
+        <br>
+        <p></p>
+        
+        <p class="page">4</p>
+    </div>
+
+    <div id="5">
+        <h1>板配置用関数　3/3</h1>
+        <h2>配置の説明</h2>
+        <p>meshはできた。あとはこれを配置する</p>
+        <br>
+        <p><code>scene.add(planes[numP]);</code>により配置する。</p>
+        <p>位置は<code>planes[numP].position.set(PosArray[0], PosArray[1], PosArray[2]);</code>で定める。ここで、PosArray=[x,y,z]と空間内における座標を表す。なお、y軸は鉛直方向である。</p>
+        <p>同様に、大きさは<code>planes[numP].scale.set(ScaleArray[0],ScaleArray[1],ScaleArray[2]);</code>で定める。ここでScaleArray=[x,y,z]でx軸y軸z軸方向それぞれへの大きさを表す。</p>
+        <p>同様に、回転角は<code>planes[numP].rotation.set(
+            Math.PI*RotationArray[0]/180,Math.PI*RotationArray[1]/180,
+            Math.PI*RotationArray[2]/180);</code>で定める。<br>ここでRotationArray=[x,y,z]はx,y,z軸を中心とする回転角を表す</p>
+        <p class="page">5</p>
+    </div>
+
+    <div id="6">
+        <h1>テキスト用マテリアル作成関数</h1>
+        <h2>(マテリアルはメッシュの一要素)</h2>
+        <p>全体</p>
+        <pre><code>function createMaterialText(i,TextArray){
+    if(!canvases[i])canvases[i]=document.createElement('canvas');
+    if(!contexts[i])contexts[i]=canvases[i].getContext('2d');
+    contexts[i].width = 256;
+    contexts[i].height = 256;
+
+    contexts[i].beginPath();
+    contexts[i].fillStyle = 'lightblue';
+    contexts[i].font= '40px sans-serif';
+    for(let j=0;j < TextArray.length;j++){
+        contexts[i].fillText(TextArray[j], 10, 60*(j+1));
+    }
+    contexts[i].fill();
+    textures[i] = new THREE.Texture( canvases[i] );
+    textures[i].needsUpdate = true;//テクスチャ変更保存
+    textMaterials[i]=new THREE.MeshLambertMaterial({
+         map: textures[i]
+    });
+} </code></pre>
+        <p class="page">6</p>
+    </div>
+
+    <div id="7">
+        <h1>テキスト用マテリアルの説明　1/3</h1>
+        <p>引数</p>
+        <p><code>i</code>: 自作配列canvases,contexts,texturesのインデックス</p>
+        <p><code>TextArray</code>: 表示する文字（配列。２列がちょうど良い）</p>
+
+        <p class="page">7</p>
+    </div>
+    
+    <div id="8">
+        <h1>テキスト用マテリアルの説明　2/3</h1>
+        <p>canvasの作成</p>
+        <p><pre><code>if(!canvases[i])canvases[i] = document.createElement( 'canvas' );
+            if(!contexts[i])contexts[i] = canvases[i].getContext( '2d' );
+            contexts[i].width = 256;
+            contexts[i].height = 256;
+
+            contexts[i].beginPath();
+            contexts[i].fillStyle = 'lightblue';
+            contexts[i].font= '40px sans-serif';
+            for(let j=0;j < TextArray.length;j++){
+                contexts[i].fillText(TextArray[j], 10, 60*(j+1));
+            }
+            contexts[i].fill();</code></pre>によりキャンバスを作成し文字を描画する</p>
+        <p class="page">8</p>
+    </div>
+    
+    <div id="9">
+        <h1>テキスト用マテリアルの説明　3/3</h1>
+        <p>マテリアルに設定</p>
+        <p><code>textures[i] = new THREE.Texture( canvases[i] );</code>によりcanvasを元にしたtextureを作成する。</p>
+        <p><code>textures[i].needsUpdate = true;//テクスチャ変更保存</code>により「文字描画後の」canvasをtextureに適応する。</p>
+        <p><code>textMaterials[i]=new THREE.MeshLambertMaterial({map: textures[i]});</code>により、作成したテクスチャを模様にもつマテリアルを作成する</p>
+
+        <p class="page">9</p>
+    </div>
+    
+    <div id="10">
+        <h1>画像用マテリアル作成関数</h1>
+        <h2>(マテリアルはメッシュの一要素)</h2>
+        <p>全体</p>
+        <pre><code>function createMaterialImage(i,url){
+        imageMaterials[i] = new THREE.MeshBasicMaterial({
+            map: new THREE.TextureLoader().load(url),
+            transparent:true
+        }); 
+    }
+             </code></pre>
+        <p class="page">10</p>
+    </div>
+    
+    <div id="11">
+        <h1>画像用マテリアルの説明　1/2</h1>
+        <p>引数</p>
+        <p><code>i</code>: 自作配列imageMaterialsのインデックス</p>
+        <p><code>url</code>: 画像のurl</p>
+
+        <p class="page">11</p>
+    </div>
+
+    <div id="12">
+        <h1>画像用マテリアルの説明　2/2</h1>
+        <p>マテリアル作成</p>
+        <p><code>imageMaterials[i] = new THREE.MeshBasicMaterial({}); </code>で画像用マテリアルを作成</p>
+        <p><code> map: new THREE.TextureLoader().load(url)</code>で画像のテクスチャを生成しそれを画像マテリアルの模様(map）に設定</p>
+        <p><code> transparent:true</code>で透過を設定。これのおかげで透過pngの透過部分が透過される</p>
+        <p class="page">12</p>
+    </div>
+
+    <div id="13">
+        <h1>動画用マテリアル作成関数</h1>
+        <h2>(マテリアルはメッシュの一要素)</h2>
+        <p>全体</p>
+        <pre><code>function createMaterialVideo(numV,url){ 
+        //videoのtexture作成
+        videoes[numV]=document.createElement("video");
+        videoes[numV].src=url;
+        videoes[numV].preload="none";
+
+        videoMaterials[numV]=new THREE.MeshBasicMaterial({
+            map: new THREE.VideoTexture(videoes[numV])
+        });
+        videoMaterials[numV].minFilter = THREE.LinearFilter;
+        videoMaterials[numV].magFilter = THREE.LinearFilter;
+        videoMaterials[numV].format = THREE.RGBFormat;
+    }
+             </code></pre>
+        <p class="page">13</p>
+    </div>
+    
+    <div id="14">
+        <h1>動画用マテリアルの説明　1/3</h1>
+        <p>引数</p>
+        <p><code>numV</code>: 自作配列videoes,videoMaterialsのインデックス</p>
+        <p><code>url</code>: 動画のurl</p>
+
+        <p class="page">14</p>
+    </div>
+
+    <div id="15">
+        <h1>動画用マテリアルの説明　2/3</h1>
+        <p>動画の作成</p>
+        <pre><code>
+            videoes[numV]=document.createElement("video");
+            videoes[numV].src=url;
+            videoes[numV].preload="none";
+        </code></pre>
+        <p>でvideoを作成。読み込みはまだ行わせない。<strong>別のPlayVideo関数（自作）で読み込み及び再生を行う</strong></p>
+
+        <p class="page">15</p>
+    </div>
+
+    <div id="16">
+        <h1>動画用マテリアルの説明　3/3</h1>
+        <p>マテリアル作成</p>
+        <p><code>videoMaterials[numV]=new THREE.MeshBasicMaterial({
+            map: new THREE.VideoTexture(videoes[numV])
+        });</code>で動画のテクスチャを生成しそれを動画マテリアルの模様(map）に設定</p>
+        <p><code>videoMaterials[numV].minFilter = THREE.LinearFilter;
+            videoMaterials[numV].magFilter = THREE.LinearFilter;
+            </code>で拡大縮小した時の補間の仕方を設定</p>
+        <p><code> videoMaterials[numV].format = THREE.RGBFormat;</code>でフォーマットを指定（今回は不必要かも）</p>
+        <p class="page">16</p>
+    </div>
+
+    <div id="17">
+        <h1>動画用マテリアルの説明　（補足）</h1>
+        <p>videoを再生させなければ、動画は動かない。その為PlayVideo関数を用意した。</p>
+        <p>全体</p>
+        <pre><code>function PlayVideo(numV,numP){
+    if(videoes[numV].preload!="auto"){
+        videoes[numV].preload="auto";
+        videoes[numV].setAttribute('playsinline','');
+        //video終了時最初の状態に戻る
+        videoes[numV].addEventListener('ended',function(){
+            videoes[numV].pause();
+            videoes[numV].currentTime=0;
+            console.log(videoMaterials);
+        });
+        //縦横比調整
+        videoes[numV].onloadedmetadata = function () {
+            planes[numP].scale.y=planes[numP].scale.x*
+            videoes[numV].videoHeight/videoes[numV].videoWidth;
+            planes[numP].material=videoMaterials[numV];
+            videoes[numV].play();
+        }
+    }else{
+        videoes[numV].play();
+    }
+}</code></pre>
+        <p>初回のみ動画の読み込みを行い、読み込み次第縦横比調節及び再生を行う。動画再生終了時に再生時間を０に戻す。</p>
+        <p>２回目以降は単に動画を再生する。</p>
+        
+        <p class="page">17</p>
+    </div>
+
+    <div id="18">
+        <h1>html用マテリアル作成関数</h1>
+        <h4>既に存在するマテリアルのcanvasを変更させることによりhtmlの内容を表示させる</h4>
+        <p>第一段階：　htmlを取得し自作配列HTMLs[numHTML]に格納する。</p>
+        <p>なお、その後、取得したhtml中のdivのnumDiv番目を<strong>CanvasSetHTML関数（次に説明）</strong>でマテリアルのcanvasに描く。
+        </p>
+        <pre><code>function GetHTML_SetCanvas(url,numHTML,numP,numDiv){
+    var xhr = new XMLHttpRequest();
+    xhr.responseType="document";
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+        if(xhr.readyState === 4 && xhr.status === 200) {
+            var restxt=xhr.responseXML;
+            HTMLs[numHTML]=restxt.documentElement;
+            document.body.appendChild(HTMLs[numHTML]);
+            CanvasSetHTML(HTMLs[numHTML].
+            　　getElementsByTagName("div")[numDiv],numP)
+            document.body.removeChild(HTMLs[numHTML]);
+        }
+    };
+    xhr.send();
+}
+             </code></pre>
+        <p class="page">18</p>
+    </div>
+
+    <div id="19">
+        <h1>html用マテリアル作成関数</h1>
+        <p>第二段階：　メッシュ（planes[numP])のマテリアルとなっているcanvasにhtmlを描画する。また縦横比(scale)を調節して見やすくする</p>
+        <pre><code>
+//canvasの中身をhtmlに変える
+function CanvasSetHTML(HTMLele,numP){
+    html2canvas(HTMLele).then(function(canvas){
+        canvases[numP].width=canvas.width; 
+        canvases[numP].height=canvas.height;
+        contexts[numP].width=canvas.width; 
+        contexts[numP].height=canvas.height;
+        contexts[numP].drawImage(canvas,0,0);
+        textures[numP].needsUpdate=true; //これないと反映されない
+        planes[numP].scale.set(1,canvas.height/canvas.width,1);
+    });
+}
+             </code></pre>
+        <p class="page">19</p>
+    </div>
+
+
+    <div id="20">
+        <h1>終わりに</h1>
+        <ul>
+            <li>不適切なコードや難解な説明に関しては申し訳ありません</li>
+            <li>理解のちょっとした助力になれば幸いです。</li>
+            <li>何かあれば<a href="https://twitter.com/snakesneaks">Twitter</a>で言って（聞いて）ください</li>
+            <li>５５代ヘビでした。ありがとうございました。</li>
+        </ul>
+        <p class="page">20</p>
+    </div>
+
+</body>
+</html>

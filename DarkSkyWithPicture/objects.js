@@ -139,7 +139,7 @@ AddPlanesInSky(10,textMaterials[10],16,[-80,0],{type:"text",page_url:"https://ww
 
 
 createMaterialText(11,["説明","背景など"]);
-AddPlanesInSky(11,textMaterials[11],16,[-100,0],{type:"open_html",page_url:"./_total_introduction.html",numHTML:0,nowDivNum:7});
+AddPlanesInSky(11,textMaterials[11],16,[-100,0],{type:"open_html",page_url:"./about_total_introduction.html",numHTML:0,nowDivNum:7});
 
 
 

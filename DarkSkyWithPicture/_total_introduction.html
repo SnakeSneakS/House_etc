@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>introduction</title>
+    <style>
+        div{
+            width: 400px;
+            color:black;
+            border:solid 3px lightseagreen;
+            background-color:antiquewhite;
+        }
+
+        div .page{
+            color: black;
+            text-align: center;
+        }
+
+        div img{
+            width:100%;
+            height:250px;
+        }
+    </style>
+</head>
+<body>
+    <div id="0">
+        <h1>自己紹介</h1>
+        <p>55代ヘビです</p>
+        <p>ゲーム作りたい〜と慢性的に考えてるけど、</p>
+        <p>面白いゲームが作れなくて悩ましいお年頃。。</p>
+        <p class="page">0</p>
+    </div>
+
+
+    <div id="1">
+        <h1>今回発表するもの</h1>
+        <p>three.jsを利用した、簡単な3Dwebサイト</p>
+        <p class="page">1</p>
+    </div>
+
+    <div id="2">
+        <h1>動機</h1>
+        <p>一人称視点の3Dwebページを作りたい！→<a href="../My3DHouse/house.html">作りました</a></p>
+        <p><img src="images/usedInHTML/House.jpeg"></p>
+        <p>空間自体を楽しむ分にはこの形態は良さそう。しかし『情報取得』という観点から見ると次の要素が気になる...</p>
+        <p class="page">2</p>
+    </div>
+
+    <div id="3">
+        <h1>気になる点１</h1>
+        <p>・一度に見れる情報量が少ない</p>
+        <img src="images/usedInHTML/House_prob1.png">
+        <p class="page">3</p>
+    </div>
+    <div id="4">
+        <h1>気になる点2</h1>
+        <p>・移動する必要があり時間がかかる</p>
+        <p>（2Dでは単にスクロールすれば良いが...）</p>
+        <img src="images/usedInHTML/House_prob2.png">
+        <p class="page">4</p>
+    </div>
+    <div id="5">
+        <h1>気になる点3</h1>
+        <p>斜めで見辛い</p>
+        <p>（2Dでは常に正面）</p>
+        <img src="./images/usedInHTML/House_prob3.png"> 
+        <p class="page">5</p>
+    </div>
+
+    <div id="6">
+        <h1>改善しよう</h1>
+        <p>もっと情報取得を楽にしたい</p>
+        <ul>
+            <li>一度にみれる情報量が少ない</li>  →視界を広く使う
+            <br><br>
+            <li>移動する必要があり無駄に時間がかかる</li>  →そもそも移動をさせない 
+            <br><br>
+            <li>斜めで見辛い</li>→全てカメラの方をむかせればいい
+            <br>
+        </ul>
+        <strong>→夜空に画像などを浮かべる、という形はどうだろうか？</strong>
+        <p class="page">6</p>
+    </div>
+
+    <div id="7">
+        <h1>やってみた</h1>
+        <p><a href="./index.html">夜空をイメージ</a></p>
+        <p><img src="images/usedInHTML/NightSky.jpeg"></p>
+        <p class="page">7</p>
+    </div>
+
+    <div id="8">
+        <h1>できること</h1>
+        <ul>
+
+            <li>画像,動画,文字の表示</li>
+            <li>html読み込み+表示</li>
+            <li>画像や動画のダウンロード</li>
+            <li>ページ遷移</li>
+        </ul>
+        <p>注）古いブラウザではできないことも</p>
+        <p class="page">8</p>
+    </div>
+
+    <div id="9">
+        <h1>使用ライブラリ</h1>
+        <p><a href="https://threejs.org">three.js</a></p>
+        <p>WebGLを利用して比較的簡単に3D表現できる</p>
+        <p>(ゲームを作る場合はunityのWebGLビルドが楽そう？)</p>
+        <p><a href="https://html2canvas.hertzen.com">html2canvas</a></p>
+        <p>htmlをcanvasに描画できる</p>
+        <p class="page">9</p>
+    </div>
+
+    <div id="10">
+        <h1>WebGLとは</h1>
+        <ul>
+            <li>Web Graphics Libraryの略称</li>
+            <li>特徴：htmlのcanvas内で3Dグラフィックスを描ける</li>
+            <li>特徴：GPU利用で高速</li>
+            <li>問題：対応ブラウザに制限</li>
+
+            <li>three.jsを使えば比較的簡単にWebGLを扱える</li>
+        </ul>
+        <p class="page">10</p>
+    </div>
+
+    <div id="11">
+        <h1>世界のイメージ</h1>
+        <ul>
+            <li>ライトを設置する</li>
+            <li>物体を設置する</li>
+            <li>カメラを設置する</li>
+            <li>カメラでとった映像をcanvasに描画する</li>
+            <img src="./images/usedInHTML/world.png">
+        </ul>
+        <p class="page">11</p>
+    </div>
+
+    <div id="12">
+        <h1>ざっくりな流れ</h1>
+        <ul>
+            <li>光とカメラを設置する</li>
+            <li>地面の板を設置する</li>
+            <li>空中に板をたくさん設置し、その表面のテクスチャとして表示したい画像などを設定する</li>
+            <li>周りに星を無数設置し、それを回転させる</li>
+            <li>クリックした時の動作などを追加する</li>
+        </ul>
+        <p class="page">12</p>
+    </div>
+
+    <div id="12">
+        <h1>テクスチャとは</h1>
+        <p>テクスチャとは物体表面の模様などを表すものです</p>
+        <p>イメージ</p>
+        <img src="./images/usedInHTML/aboutTexture.png">
+        <p class="page">12</p>
+    </div>
+
+    <div id="13">
+        <h1>html2canvasの利用</h1>
+        <p>テクスチャ としては、画像、動画、htmlのcanvas、等が使える。しかし、htmlのdom要素はテクスチャ として使えない</p>
+        <br>
+        <p>→htmlのdom要素をcanvasに描けばいいのでは？</p>
+
+        <p class="page">13</p>
+    </div>
+
+    <div id="14">
+        <h1>html2canvasの利用</h1>
+        <p>html2canvasを使ってcanvasにhtmlの内容を描画</p>
+        <p>その後、描画したcanvasを物体のテクスチャに設定した</p>
+        <img src="./images/usedInHTML/html_to_texture.png">
+        <p>ページ拡大すると適切に表示されない、リンクボタンが効かない、など問題はある、、</p>
+
+        <p class="page">14</p>
+    </div>
+
+    <div id="15">
+        <h1>css3Drenderer</h1>
+        <ul>
+            <lI>実はcssでも３D表現はできる(transform:matrix など)が、3Dの計算は大変→three.jsのcss3Drendererが使える</li>
+            <li>利点：cssであるため、DOM要素を直接立体配置できる。リンクボタンなどももちろん使える。CSS対応してれば使える。</li>
+            <li>欠点：WebGLと違い3Dモデル表示には適さない</li>
+            <li>今回はDOM要素のみの表示で十分。css3Drenderer使えば良かったかも（？）</li>
+        </ul>
+        <p class="page">15</p>
+    </div>
+
+    <div id="16">
+        <h1>追加したかったこと</h1>
+        <p>時間がなくできなかった</p>
+        <ul>
+            <lI>アニメーションを付けたい</li>
+            <li>3Dモデル追加したい。(Blenderで出力できるgltf形式を表示できる)</li>例えば、星々の間を飛ぶドラゴンや地面をテクテク歩くキツネがいたら雰囲気出るのでは？
+        </ul>
+        <p class="page">16</p>
+    </div>
+
+
+    <!--
+    <div id="5">
+        <h1>htmlをcanvasに</h1>
+        <ul>
+            <li>html2canvasを利用</li>
+            <li><a href="https://html2canvas.hertzen.com">https://html2canvas.hertzen.com</a> </li>
+            <li>問題点：ただ描画してるだけなのでリンクボタンなどはできない（ページ遷移してからリンクタッチしないとダメ）</li>
+        </ul>
+        <p class="page">5</p>
+    </div>
+    -->
+
+    <div id="17">
+        <h1>終わりに</h1>
+        <ul>
+            <li>無知ゆえの効率の悪さや不適切なコードなどたくさんあると思います。ご了承ください。</li>
+            <li>５５代ヘビでした。</li>
+            <li>ありがとうございました。</li>
+        </ul>
+        <p class="page">17</p>
+    </div>
+
+</body>
+</html>

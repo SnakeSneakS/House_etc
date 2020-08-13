@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>introduction</title>
+    <style>
+        div{
+            width: 400px;
+            color:black;
+            border:solid 3px lightseagreen;
+            background-color:antiquewhite;
+        }
+
+        div .page{
+            color: black;
+            text-align: center;
+        }
+
+        div img{
+            width:100%;
+            height:250px;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="0">
+        <h1>コード説明（関数）</h1>
+        <h1>目次</h1>
+        <ul>
+            <li>はじめに</li>
+            <li>板配置関数</li>
+            <li>テキスト用マテリアル作成関数</li>
+            <li>画像用マテリアル作成関数</li>
+            <li>動画用マテリアル作成関数</li>
+            <li>html用マテリアル作成関数</li>
+        </ul>
+        <p class="page">0</p>
+    </div>
+
+
+    <div id="1">
+        <h1>はじめに</h1>
+        <p>これらのコードはネットで調べながら行き当たりばったりで書いたコードです。</p>
+        <p>また、ここで書いている内容もネットで調べながら自分なりに解釈したものです。</p>
+        <p>そのため、不適切な点や誤った点もあるかと思います。 ご容赦ください。</p>
+        <p class="page">1</p>
+    </div>
+
+    <div id="2">
+        <h1>板配置用関数</h1>
+        <p>関数全体</p>
+        <pre><code >
+function addPlane(numP,material,PosArray,ScaleArray,RotationArray){
+
+    //板のジオメトリ（形状）を設定
+    var geometry  = new THREE.PlaneGeometry(2, 2); 
+              
+    //マテリアルとジオメトリからメッシュ（物体）を作る。
+    planes[numP]=new THREE.Mesh(geometry, material); 
+
+    //配置する場所
+    planes[numP].position.set(PosArray[0], PosArray[1], PosArray[2]);
+
+    //大きさ
+    if(ScaleArray){
+        planes[numP].scale.set(ScaleArray[0],ScaleArray[1],ScaleArray[2]);
+    }
+
+    //回転
+    if(RotationArray)planes[numP].rotation.set(
+    Math.PI*RotationArray[0]/180,Math.PI*RotationArray[1]/180,
+    Math.PI*RotationArray[2]/180);
+    
+            
+    //シーンに追加（見える様になる）
+    scene.add(planes[numP]);
+}
+        </code></pre>
+
+        <p class="page">2</p>
+    </div>
+
+    <div id="3">
+        <h1>板配置用関数　1/3</h1>
+        <h2>引数の説明</h2>
+        <ul>
+            <li><code>numP</code>:　配列planesのインデックス</li>
+            <li><code>material</code>:　マテリアル（材質や模様）</li>
+            <li><code>PosArray</code>:　位置座標</li>
+            <li><code>ScaleArray</code>:　大きさ</li>
+            <li><code>RotationArray</code>:　回転具合</li>
+        </ul>
+        <p class="page">3</p>
+    </div>
+    
+    <div id="3">
+        <h1>板配置用関数　2/3</h1>
+        <h2>メッシュの生成</h2>
+        <p>mesh（物体）は2つの要素「geometry(形状)」,「material(材質)」からなる</p>
+        <br>
+        <p>板の形状のgeometryは<code>var geometry  = new THREE.PlaneGeometry(2, 2); </code>により生成する。</p>
+        <p>materialは別の関数によって生成する。</p>
+        <p><code>planes[numP]=new THREE.Mesh(geometry, material);</code>によりgeometryとmaterialを合わせてmeshを生成する（planes[numP]が生成されたmeshとなる)</p>
+        <br>
+        <p></p>
+        
+        <p class="page">3</p>
+    </div>
+
+    <div id="3">
+        <h1>板配置用関数　3/3</h1>
+        <h2>配置の説明</h2>
+        <p>meshはできた。あとはこれを配置する</p>
+        <br>
+        <p>位置は<code>planes[numP].position.set(PosArray[0], PosArray[1], PosArray[2]);</code>で定める。ここで、PosArray=[x,y,z]と空間内における座標を表す。なお、y軸は鉛直方向である。</p>
+        <p>同様に、大きさは<code>planes[numP].scale.set(ScaleArray[0],ScaleArray[1],ScaleArray[2]);</code>で定める。ここでScaleArray=[x,y,z]でx軸y軸z軸方向それぞれへの大きさを表す。</p>
+        <p>同様に、回転角は<code>planes[numP].rotation.set(
+            Math.PI*RotationArray[0]/180,Math.PI*RotationArray[1]/180,
+            Math.PI*RotationArray[2]/180);</code>で定める。ここでRotationArray=[x,y,z]はx軸y軸z軸を中心とする回転角だが、角度指定の時は</p>
+        <p class="page">3</p>
+    </div>
+
+    <div id="3">
+        <h1>板配置用関数　1/3</h1>
+        <h2>引数の説明</h2>
+        <ul>
+            <li><code>numP</code>:　配列planesのインデックス</li>
+            <li><code>material</code>:　マテリアル（材質や柄）</li>
+            <li><code>PosArray</code>:　位置座標</li>
+            <li><code>ScaleArray</code>:　大きさ</li>
+            <li><code>RotationArray</code>:　回転具合</li>
+        </ul>
+        <p class="page">3</p>
+    </div>
+    
+
+
+    <div id="17">
+        <h1>終わりに</h1>
+        <ul>
+            <li>無知ゆえの効率の悪さや不適切なコードなどたくさんあると思います。ご了承ください。</li>
+            <li>５５代ヘビでした。</li>
+            <li>ありがとうございました。</li>
+        </ul>
+        <p class="page">17</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+
+
+
+
+
+    <script>
+        var videoes=new Array(16);
+        var videoSetTimeout=new Array(16);
+    
+        AddVideo(0,"./images/GirlSayFight.mp4","./images/GirlSayFight.jpeg");
+        setTimeout(function(){PlayVideo(0);},1000);
+
+        
+        function AddVideo(i,url,urlPoster){
+            videoes[i]=document.createElement("video");
+            videoes[i].src=url;
+            videoes[i].preload="none";
+            if(urlPoster)videoes[i].poster=urlPoster;
+            videoes[i].addEventListener('ended',function(){
+                videoes[i].pause();
+                videoes[i].currentTime=0;
+                clearTimeout(videoSetTimeout[i]);
+                console.log("ended");
+            });
+            document.body.appendChild(videoes[i]);
+        }
+        
+        function PlayVideo(i){
+
+            if(videoes[i].preload!="auto")videoes[i].preload="auto";
+            if(videoes[i].autoplay!="auto")videoes[i].autoplay=true;
+            else videoes[i].play();
+            //PlayVideoLoop(i);
+        }
+        
+        function PlayVideoLoop(i){
+            //contexts[i].drawImage(videoes[i],0,0,canvases[i].width,canvases[i].height);
+            videoSetTimeout[i]=setTimeout(function(){
+                PlayVideoLoop(i);
+            },30);
+        }
+        
+        
+        
+        
+    </script>
+
+
+
+
+</body>
+</html>
+
+
+
+

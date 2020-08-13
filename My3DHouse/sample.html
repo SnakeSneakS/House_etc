@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML FOR LOAD </title>
+    <style>
+        div{
+            width: 300px;
+            color:black;
+            border:solid 3px lightseagreen;
+        }
+
+        div .page{
+            color: black;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="0">
+        <h1>Hello world</h1>
+        <p>外部htmlの読み込みができます</p>
+        <p class="page">0</p>
+    </div>
+
+    <div id="1">
+        <h1>目次</h1>
+        <ul>
+            <li>これのイメージ</li>
+            <li>three.jsの表面</li>
+            <li>htmlをcanvasに</li>
+            <li>終わりに</li>
+        </ul>
+        <p class="page">1</p>
+    </div>
+
+    <div id="2">
+        <h1>これのイメージ</h1>
+        <ul>
+            <li>本のように進めていく</li>
+            <li>外部のhtmlを随時読み込む</li>
+            <li>立体空間内にdom要素置きたかった</li>
+        </ul>
+        <p class="page">2</p>
+    </div>
+
+    <div id="3">
+        <h1>three.jsの表面</h1>
+        <ul>
+            <li>three.jsでは（多分）立体空間にdom要素おけない</li>
+            <li>css3Drendererを利用すればcssによるdom要素の立体表示が比較的簡単に表示できるらしいが、モデルの表示には適さないらしい。</li>
+            <li>しかしcanvasをテクスチャとして使用可能→canvasにhtml描けばいいのでは？</li>
+        </ul>
+        <p class="page">3</p>
+    </div>
+
+    <div id="4">
+        <h1>htmlをcanvasに</h1>
+        <ul>
+            <li>html2canvasを利用</li>
+            <li>(https://html2canvas.hertzen.com)</li>
+            <li>問題点：ただ描画してるだけなのでリンクボタンなどはできない</li>
+        </ul>
+        <p class="page">4</p>
+    </div>
+
+    <div id="5">
+        <h1>終わりに</h1>
+        <ul>
+            <li>ありがとうございました。</li>
+            <li>無知ゆえ効率の悪さやコードの不適切さなどあると思いますがお許しください。</li>
+            <li>５５代ヘビでした。</li>
+        </ul>
+        <p class="page">5</p>
+    </div>
+
+
+</body>
+</html>

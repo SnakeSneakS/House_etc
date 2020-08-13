@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>htmlも</h1>
+        <p>描けます</p>
+        <p>html2canvas様ありがとう</p>
+        <a href="../My3DHouse/house.html">aa</a>
+    </div>
+   
+    <script src="../html2canvas.js"></script>
+    <script>
+        var canvas=new Array();
+        let a;
+        html2canvas(document.getElementsByTagName("div")[0]).then(function(canvas){
+            canvas[0]=canvas;
+           document.body.appendChild(canvas[0]);
+           a=canvas.width;
+        });
+        setTimeout(function(){
+            alert(canvas[0].height);
+        },2000);
+        
+        
+    </script>
+</body>
+</html>

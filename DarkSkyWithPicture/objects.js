@@ -142,7 +142,7 @@ createMaterialText(11,["説明","背景など"]);
 AddPlanesInSky(11,textMaterials[11],16,[-100,0],{type:"open_html",page_url:"./about_total_introduction.html",numHTML:0,nowDivNum:7});
 
 createMaterialText(12,["説明","コード１"]);
-AddPlanesInSky(12,textMaterials[12],16,[-120,20],{type:"open_html",page_url:"./about_code1.html",numHTML:0,nowDivNum:0});
+AddPlanesInSky(12,textMaterials[12],16,[-120,20],{type:"open_html",page_url:"./about_code1.html",numHTML:1,nowDivNum:0});
 
 
 
